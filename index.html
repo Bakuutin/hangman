@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>The Hangman Game</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Rye&display=swap" rel="stylesheet">
+    
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="/style.css">
+    
+    <!-- import the webpage's javascript file -->
+
+    <script src="https://unpkg.com/@reactivex/rxjs@6.5.5/dist/global/rxjs.umd.js" defer></script>
+    <script src="/script.js" type="module" defer></script>
+  </head>  
+  <body>
+    <div class="padded">
+      <h1>The Hangman Game</h1>
+      <div class="mt">
+        Word length: <input id="wordLengthInput" value="5" type="number" min="3" max="14">
+      </div>
+    </div>
+    
+    <div id="loader" class="mt"></div>
+    
+    <div id="field">
+
+      <div id="word"></div>
+      
+      <div id="lettersContainer" class="mt">
+        <div class="row">
+          <div class="key">A</div>
+          <div class="key">B</div>
+          <div class="key">C</div>
+          <div class="key">D</div>
+          <div class="key">E</div>
+          <div class="key">F</div>
+          <div class="key">G</div>
+          <div class="key">H</div>
+          <div class="key">I</div>
+          <div class="key">J</div>
+          <div class="key">K</div>
+          <div class="key">L</div>
+          <div class="key">M</div>
+        </div>
+        <div class="row">
+          <div class="key">N</div>
+          <div class="key">O</div>
+          <div class="key">P</div>
+          <div class="key">Q</div>
+          <div class="key">R</div>
+          <div class="key">S</div>
+          <div class="key">T</div>
+          <div class="key">U</div>
+          <div class="key">V</div>
+          <div class="key">W</div>
+          <div class="key">X</div>
+          <div class="key">Y</div>
+          <div class="key">Z</div>
+        </div>
+      </div>
+
+
+
+      <div class="stableBodyContainer">
+        
+        <div id="rope"></div>
+        <div id="bodyContainer">
+          <div id="body"></div>
+          <div id="head"></div>
+          <div id="leftArm"></div>
+          <div id="rightArm"></div>
+          <div id="leftLeg"></div>
+          <div id="rightLeg"></div>
+        </div>
+      </div>
+    </div>
+    <!-- include the Glitch button to show what the webpage is about and
+          to make it easier for folks to view source and remix -->
+    <div class="glitchButton" style="position:fixed;top:20px;right:20px;"></div>
+    <script src="https://button.glitch.me/button.js"></script>
+  </body>
+</html>

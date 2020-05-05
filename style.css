@@ -1,0 +1,239 @@
+/* CSS files add styling rules to your content */
+
+body {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+}
+
+.mt {
+  margin-top: 10px;
+}
+
+.padded {
+  margin: 20px;
+}
+
+@media (max-width: 600px) {
+  .padded {
+    margin: 5px;
+  }
+}
+
+h1 {
+  padding-right: 100px;
+  font-family: "Rye", cursive;
+}
+
+#loader {
+  background-color: black;
+  height: 20px;
+  width: 0;
+  margin: 15px 0;
+}
+
+.key,
+#wordLengthInput {
+  width: 40px;
+  background: black;
+  border: none;
+  color: white;
+  height: 20px;
+  padding: 0 3px;
+}
+
+#word {
+  height: 40px;
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+}
+
+#word > input {
+  display: flex;
+  margin: 0 5px;
+  width: 30px;
+  background: none;
+  border: none;
+  border-bottom: 3px solid black;
+  font-family: "Rye", cursive;
+  text-align: center;
+  font-size: 20px;
+}
+
+#word > input:focus {
+  outline: none;
+  border-bottom: 3px solid #5027d9;
+}
+user agent stylesheet :focus {
+  outline: -webkit-focus-ring-color auto 1px;
+}
+
+@keyframes hanging {
+  0% {
+    transform: rotate(20deg);
+  }
+  100% {
+    transform: rotate(-20deg);
+  }
+}
+
+#lettersContainer .row {
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  background: black;
+}
+
+.key {
+  font-family: "Rye", cursive;
+  width: 25px;
+  height: 30px;
+}
+.key:hover,
+.key.active {
+  background: #5027d9;
+}
+.key.out {
+  background: gray;
+}
+
+#field {
+  display: none;
+}
+
+.stableBodyContainer {
+  width: 30vmin;
+  height: 30vmin;
+  margin: 0 auto;
+  position: relative;
+  z-index: -1;
+}
+
+#bodyContainer {
+  top: 10vmin;
+  margin: 0 auto;
+  width: 10vmin;
+  display: flex;
+  position: relative;
+  transform-origin: 4.5vmin 4w;
+  animation: hanging 2s infinite ease-in-out alternate;
+}
+
+#bodyContainer > * {
+  position: absolute;
+}
+
+#head {
+  width: 5vmin;
+  left: 1.5vmin;
+  height: 5vmin;
+  border-radius: 100%;
+  border: 1vmin solid black;
+  background: white;
+}
+
+#body {
+  top: 6.1vmin;
+  left: 4.5vmin;
+  height: 14vmin;
+  width: 1vmin;
+  background: black;
+}
+
+@keyframes right-hand {
+  0% {
+    transform: rotate(100deg);
+  }
+  100% {
+    transform: rotate(150deg);
+  }
+}
+
+@keyframes left-hand {
+  0% {
+    transform: rotate(-100deg);
+  }
+  100% {
+    transform: rotate(-150deg);
+  }
+}
+
+#rightArm {
+  top: 2vmin;
+  left: 4.5vmin;
+  height: 7vmin;
+  width: 1vmin;
+  background: black;
+  animation: right-hand 1s infinite alternate;
+  transform-origin: bottom center;
+}
+
+#leftArm {
+  top: 2vmin;
+  left: 4.5vmin;
+  height: 7vmin;
+  width: 1vmin;
+  background: black;
+  animation: left-hand 1s infinite alternate;
+  transform-origin: bottom center;
+}
+
+@keyframes right-leg {
+  0% {
+    transform: rotate(-40deg);
+  }
+  100% {
+    transform: rotate(-10deg);
+  }
+}
+
+@keyframes left-leg {
+  0% {
+    transform: rotate(40deg);
+  }
+  100% {
+    transform: rotate(10deg);
+  }
+}
+
+#leftLeg {
+  top: 20vmin;
+  left: 4.5vmin;
+  height: 9vmin;
+  width: 1vmin;
+  background: black;
+  animation: left-leg 1s infinite alternate;
+  transform-origin: top center;
+}
+
+#rightLeg {
+  top: 20vmin;
+  left: 4.5vmin;
+  height: 9vmin;
+  width: 1vmin;
+  background: black;
+  animation: right-leg 1s infinite alternate;
+  transform-origin: top center;
+}
+
+@keyframes rope {
+  0% {
+    transform: rotate(5deg);
+  }
+  100% {
+    transform: rotate(-5deg);
+  }
+}
+
+#rope {
+  position: absolute;
+  top: -1vmin;
+  left: 14.5vmin;
+  height: 12vmin;
+  width: 1vmin;
+  background: black;
+  animation: rope 2s infinite ease-in-out alternate;
+  transform-origin: top center;
+}
