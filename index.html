@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Hangman</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="/static/icon.png" />
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Rye&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style.css">
+
+    <script src="https://unpkg.com/@reactivex/rxjs@6.5.5/dist/global/rxjs.umd.js" defer></script>
+    <script src="/interactive.mjs" type="module" defer></script>
+  </head>
+  <body>
+    <h1>The Hangman</h1>
+    <div class="mt center">
+      Word length: <input id="wordLengthInput" value="5" type="number" min="3" max="14">
+    </div>
+
+    <div id="loader" class="mt"></div>
+
+    <div id="field">
+
+      <div id="outLetters"></div>
+      <div id="guess"></div>
+
+      <div id="word"></div>
+      <button id="done">Done</button>
+
+      <div class="stableBodyContainer">
+        <div id="rope"></div>
+        <div id="bodyContainer">
+          <div id="body"></div>
+          <div id="head"></div>
+          <div id="leftArm"></div>
+          <div id="rightArm"></div>
+          <div id="leftLeg"></div>
+          <div id="rightLeg"></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

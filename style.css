@@ -1,0 +1,259 @@
+/* CSS files add styling rules to your content */
+
+body {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+}
+
+.mt {
+  margin-top: 10px;
+}
+
+.padded {
+  margin: auto 20px;
+}
+
+@media (max-width: 600px) {
+  .padded {
+    margin: 5px;
+  }
+}
+
+h1 {
+  margin: 3px auto;
+  text-align: center;
+  font-family: "Rye", cursive;
+}
+
+.center {
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#loader {
+  background-color: black;
+  height: 20px;
+  width: 0;
+  margin: 15px 0;
+}
+
+#wordLengthInput {
+  width: 40px;
+  background: black;
+  border: none;
+  color: white;
+  height: 20px;
+  padding: 0 3px;
+}
+
+#word {
+  height: 40px;
+  width: 100%;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+#outLetters {
+  margin: 3px auto;
+  text-align: center;
+  text-decoration: line-through;
+  height: 1em;
+}
+
+#guess {
+  margin: 3px auto;
+  text-align: center;
+  white-space: pre-line;
+}
+
+#done {
+  background: black;
+  color: white;
+  font-family: "Rye", cursive;
+  text-align: center;
+  display: block;
+  border: none;
+  height: 15vmin;
+  width: 15vmin;
+  padding: 0;
+  max-height: 30px;
+  margin: 0 auto;
+}
+
+#word>button {
+  margin: 0 5px;
+  width: 30px;
+  height: 35px;
+  display: flex;
+  border: none;
+  background: none;
+  font-family: "Rye", cursive;
+  font-size: 20px;
+}
+
+#word>button:focus, #word>button:hover {
+  outline: none;
+  color: #5027d9;
+}
+
+#word>button:hover {
+  outline: none;
+  color: black;
+}
+
+@keyframes hanging {
+  0% {
+    transform: rotate(20deg);
+  }
+
+  100% {
+    transform: rotate(-20deg);
+  }
+}
+
+#field {
+  display: none;
+}
+
+.stableBodyContainer {
+  width: 30vmin;
+  height: 30vmin;
+  margin: 0 auto;
+  position: relative;
+  z-index: -1;
+}
+
+#bodyContainer {
+  top: 10vmin;
+  margin: 0 auto;
+  width: 10vmin;
+  display: flex;
+  position: relative;
+  transform-origin: 4.5vmin 4w;
+  animation: hanging 2s infinite ease-in-out alternate;
+}
+
+#bodyContainer>* {
+  position: absolute;
+}
+
+#head {
+  width: 5vmin;
+  left: 1.5vmin;
+  height: 5vmin;
+  border-radius: 100%;
+  border: 1vmin solid black;
+  background: white;
+}
+
+#body {
+  top: 6.1vmin;
+  left: 4.5vmin;
+  height: 14vmin;
+  width: 1vmin;
+  background: black;
+}
+
+@keyframes right-hand {
+  0% {
+    transform: rotate(100deg);
+  }
+
+  100% {
+    transform: rotate(150deg);
+  }
+}
+
+@keyframes left-hand {
+  0% {
+    transform: rotate(-100deg);
+  }
+
+  100% {
+    transform: rotate(-150deg);
+  }
+}
+
+#rightArm {
+  top: 2vmin;
+  left: 4.5vmin;
+  height: 7vmin;
+  width: 1vmin;
+  background: black;
+  animation: right-hand 1s infinite alternate;
+  transform-origin: bottom center;
+}
+
+#leftArm {
+  top: 2vmin;
+  left: 4.5vmin;
+  height: 7vmin;
+  width: 1vmin;
+  background: black;
+  animation: left-hand 1s infinite alternate;
+  transform-origin: bottom center;
+}
+
+@keyframes right-leg {
+  0% {
+    transform: rotate(-40deg);
+  }
+
+  100% {
+    transform: rotate(-10deg);
+  }
+}
+
+@keyframes left-leg {
+  0% {
+    transform: rotate(40deg);
+  }
+
+  100% {
+    transform: rotate(10deg);
+  }
+}
+
+#leftLeg {
+  top: 20vmin;
+  left: 4.5vmin;
+  height: 9vmin;
+  width: 1vmin;
+  background: black;
+  animation: left-leg 1s infinite alternate;
+  transform-origin: top center;
+}
+
+#rightLeg {
+  top: 20vmin;
+  left: 4.5vmin;
+  height: 9vmin;
+  width: 1vmin;
+  background: black;
+  animation: right-leg 1s infinite alternate;
+  transform-origin: top center;
+}
+
+@keyframes rope {
+  0% {
+    transform: rotate(5deg);
+  }
+
+  100% {
+    transform: rotate(-5deg);
+  }
+}
+
+#rope {
+  position: absolute;
+  top: -1vmin;
+  left: 14.5vmin;
+  height: 12vmin;
+  width: 1vmin;
+  background: black;
+  animation: rope 2s infinite ease-in-out alternate;
+  transform-origin: top center;
+}
