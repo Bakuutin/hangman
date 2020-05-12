@@ -2,7 +2,7 @@
 
 It's my weekend project
 
-Play here: *link*
+Play here: https://bakuutin.github.io/hangman/
 
 ## How well the algorithm solves words
 
