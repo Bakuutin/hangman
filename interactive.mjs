@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
   ];
 
   const loadDictWithProgressBar = async () => {
-    const response = await fetch("/static/dictionary.json");
+    const response = await fetch("./static/dictionary.json");
     const reader = response.body.getReader();
     const contentLength = +response.headers.get("Content-Length");
 

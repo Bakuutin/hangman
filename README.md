@@ -6,4 +6,4 @@ Play here: *link*
 
 ## How well the algorithm solves words
 
-![graph](/graph.png)
+![graph](graph.png)
