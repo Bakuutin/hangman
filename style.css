@@ -31,6 +31,24 @@ h1 {
   margin-right: auto;
 }
 
+.content-centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.footer {
+  color: gray;
+}
+
+.footer a {
+  color: gray;
+}
+
+.footer > * {
+  margin-top: 10px;
+}
+
 #loader {
   background-color: black;
   height: 20px;
@@ -67,20 +85,32 @@ h1 {
   margin: 3px auto;
   text-align: center;
   white-space: pre-line;
+  line-height: 22px;
+}
+
+#guess b {
+  font-family: "Rye", cursive;
+  font-weight: normal;
 }
 
 #done {
   background: black;
   color: white;
   font-family: "Rye", cursive;
-  text-align: center;
-  display: block;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: none;
-  height: 15vmin;
-  width: 15vmin;
-  padding: 0;
-  max-height: 30px;
+  min-width: 15vmin;
+  height: 30px;
   margin: 0 auto;
+}
+
+#done img {
+  margin-left: 5px;
+  height: 16px;
+  filter: invert(1);
 }
 
 #word>button {
@@ -92,17 +122,36 @@ h1 {
   background: none;
   font-family: "Rye", cursive;
   font-size: 20px;
+  outline: none !important;
+}
+
+@media (max-width: 600px) {
+  #word>button {
+    margin: 0 5px;
+    width: 10px;
+    font-size: 20px;
+  }
 }
 
 #word>button:focus, #word>button:hover {
-  outline: none;
   color: #5027d9;
 }
 
-#word>button:hover {
-  outline: none;
-  color: black;
+#refresh {
+  height: 20px;
+  outline: none !important;
+  border: none;
+  background: none;
 }
+
+#refresh img {
+  height: 20px;
+}
+
+#refresh:focus img, #refresh:hover img {
+  filter: drop-shadow(0 0 3px #5027d9);
+}
+
 
 @keyframes hanging {
   0% {
@@ -120,7 +169,7 @@ h1 {
 
 .stableBodyContainer {
   width: 30vmin;
-  height: 30vmin;
+  height: 41vmin;
   margin: 0 auto;
   position: relative;
   z-index: -1;

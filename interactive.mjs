@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
       "guess",
       "outLetters",
       "done",
+      "refresh",
       "bodyContainer",
       "head",
       "body",
@@ -94,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   const endGame = msg => {
-    elements.done.innerHTML = "Again";
+    elements.done.innerHTML = "Again <img src='static/refresh.svg'>";
     elements.guess.innerHTML = msg;
   };
 
@@ -125,6 +126,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   data.$length.subscribe(resetGame);
+  rxjs.fromEvent(elements.refresh, "click").subscribe(resetGame);
 
   rxjs
     .combineLatest(data.$word, data.$outLetters)
@@ -148,7 +150,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
   data.$guessingLetter.subscribe(l => {
     if (l) {
-      elements.guess.innerHTML = `My guess is ${l}`;
+      elements.guess.innerHTML =
+        `My guess is <b>${l}</b>\nClick on it, if there there's any`;
     } else {
       elements.guess.innerHTML = "Guessing...";
     }
@@ -194,13 +197,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const letter = data.$guessingLetter.value;
     const index = +name;
 
-    if (data.$word.value[index]) {
+    if (data.$word.value[index] && data.$word.value[index] !== letter) {
       return;
     }
 
-    target.innerHTML = letter;
     const newWord = [...data.$word.value];
-    newWord[index] = letter;
+
+    if (data.$word.value[index] === letter) {
+      target.innerHTML = PLACEHOLDER;
+      newWord[index] = "";
+    } else {
+      target.innerHTML = letter;
+      newWord[index] = letter;
+    }
 
     data.$word.next(newWord);
   });
