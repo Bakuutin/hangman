@@ -10,7 +10,7 @@ Play here: <https://bakuutin.github.io/hangman/>
 
 ## Inspiration
 
-Inspiration to write the game I got from YouTube video [hangman is a weird game](https://youtu.be/le5uGqHKll8) by jan Misali.
+Inspiration to write the game I got from YouTube video [hangman is a weird game](https://youtu.be/le5uGqHKll8) by Mitch Halley.
 
 ## MIT License
 
