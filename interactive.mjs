@@ -68,7 +68,8 @@ document.addEventListener("DOMContentLoaded", () => {
     return JSON.parse(result);
   };
 
-  const data = {
+  // store state here
+  const state = {
     dict: null,
     $word: new rxjs.BehaviorSubject(),
     $length: new rxjs.BehaviorSubject(5),
@@ -82,14 +83,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const isGameOwer = () => (
     (
       // I lost
-      data.$errorsNumber.value >= MAX_ERRORS
+      state.$errorsNumber.value >= MAX_ERRORS
     ) || (
       // I won
-      data.$word.value &&
-      data.$word.value.filter(l => !!l).length === data.$length.value
+      state.$word.value &&
+      state.$word.value.filter(l => !!l).length === state.$length.value
     ) || (
       // User guessed non-dict word
-      !data.possibleWords || !data.possibleWords.length
+      !state.possibleWords || !state.possibleWords.length
     )
   );
 
@@ -113,38 +114,35 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const resetGame = () => {
-    if (!data.dict) {
+    if (!state.dict) {
       return;
     }
     elements.done.innerHTML = "Done";
-    data.possibleWords = Array.from(data.dict.keys()).filter(
-      w => w.length === data.$length.value
+    state.possibleWords = Array.from(state.dict.keys()).filter(
+      w => w.length === state.$length.value
     );
-    data.$outLetters.next([]);
-    data.$word.next(new Array(data.$length.value).fill(""));
-    requestAnimationFrame(() => drawWordButtons(data.$length.value));
+    state.$outLetters.next([]);
+    state.$word.next(new Array(state.$length.value).fill(""));
+    requestAnimationFrame(() => drawWordButtons(state.$length.value));
   };
 
-  data.$length.subscribe(resetGame);
+  state.$length.subscribe(resetGame);
   rxjs.fromEvent(elements.refresh, "click").subscribe(resetGame);
 
   // show or hide refresh button
-  rxjs
-    .combineLatest(data.$word, data.$outLetters)
-    .pipe(rxjs.operators.debounceTime(100))
-    .subscribe(([word, outLetters]) => elements.refresh.classList.toggle(
-      "hide", !outLetters.length && !isGameOwer()
-    ));
+  state.$outLetters.subscribe(outLetters => elements.refresh.classList.toggle(
+    "hide", !outLetters.length && !isGameOwer()
+  ));
 
   // guess next letter
   rxjs
-    .combineLatest(data.$word, data.$outLetters)
+    .combineLatest(state.$word, state.$outLetters)
     .pipe(
       rxjs.operators.debounceTime(100),
       rxjs.operators.filter(([word, outLetters]) => word && outLetters)
     )
     .subscribe(([word, outLetters]) => {
-      data.$errorsNumber.next(
+      state.$errorsNumber.next(
         outLetters.filter(l => !word.includes(l)).length,
       );
 
@@ -152,12 +150,12 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      data.$guessingLetter.next(
-        guess(data.dict, data.possibleWords, outLetters),
+      state.$guessingLetter.next(
+        guess(state.dict, state.possibleWords, outLetters),
       );
     });
 
-  data.$guessingLetter.subscribe(l => {
+  state.$guessingLetter.subscribe(l => {
     if (l) {
       elements.guess.innerHTML =
         `My guess is <b>${l}</b>\nClick on it, if there there's any`;
@@ -166,9 +164,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  data.$outLetters.subscribe(outLetters => {
+  state.$outLetters.subscribe(outLetters => {
     elements.outLetters.innerHTML = outLetters.filter(
-      l => !data.$word.value.includes(l)
+      l => !state.$word.value.includes(l)
     ).join(" ");
   });
 
@@ -177,7 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
     const index = +target.name;
-    if (data.$word.value[index]) {
+    if (state.$word.value[index]) {
       return;
     }
     target.innerHTML = PLACEHOLDER;
@@ -185,15 +183,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   rxjs.fromEvent(elements.word, "mouseover").subscribe(({ target }) => {
     if (
-      target.parentNode !== elements.word || !data.$guessingLetter.value
+      target.parentNode !== elements.word || !state.$guessingLetter.value
     ) {
       return;
     }
     const index = +target.name;
-    if (data.$word.value[index]) {
+    if (state.$word.value[index]) {
       return;
     }
-    target.innerHTML = data.$guessingLetter.value;
+    target.innerHTML = state.$guessingLetter.value;
   });
 
   rxjs.fromEvent(elements.word, "click").subscribe(event => {
@@ -203,16 +201,16 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    const letter = data.$guessingLetter.value;
+    const letter = state.$guessingLetter.value;
     const index = +name;
 
-    if (data.$word.value[index] && data.$word.value[index] !== letter) {
+    if (state.$word.value[index] && state.$word.value[index] !== letter) {
       return;
     }
 
-    const newWord = [...data.$word.value];
+    const newWord = [...state.$word.value];
 
-    if (data.$word.value[index] === letter) {
+    if (state.$word.value[index] === letter) {
       target.innerHTML = PLACEHOLDER;
       newWord[index] = "";
     } else {
@@ -220,16 +218,16 @@ document.addEventListener("DOMContentLoaded", () => {
       newWord[index] = letter;
     }
 
-    data.$word.next(newWord);
+    state.$word.next(newWord);
   });
 
-  data.$word.subscribe(word => {
+  state.$word.subscribe(word => {
     if (word && word.filter(l => !!l).length === word.length) {
       endGame("Woohoo! I solved it.");
     }
   });
 
-  data.$errorsNumber.subscribe(n => {
+  state.$errorsNumber.subscribe(n => {
     window.requestAnimationFrame(() => {
       for (let i = 0; i < parts.length; i++) {
         const el = parts[i];
@@ -237,10 +235,10 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-    if (n >= MAX_ERRORS && data.$outLetters.value.length) {
+    if (n >= MAX_ERRORS && state.$outLetters.value.length) {
       endGame(
         "You won! My guesses are:\n" +
-        data.possibleWords.slice(0, 10).join(" ")
+        state.possibleWords.slice(0, 10).join(" ")
       );
     }
   });
@@ -254,19 +252,19 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
-      data.possibleWords = getNewPossibleWords(
-        data.$word.value,
-        data.$guessingLetter.value,
-        data.possibleWords,
+      state.possibleWords = getNewPossibleWords(
+        state.$word.value,
+        state.$guessingLetter.value,
+        state.possibleWords,
       );
 
-      if (!data.possibleWords.length) {
+      if (!state.possibleWords.length) {
         endGame("I give up, I don't know this word");
         return;
       }
 
-      data.$outLetters.next(
-        [data.$guessingLetter.value, ...data.$outLetters.value],
+      state.$outLetters.next(
+        [state.$guessingLetter.value, ...state.$outLetters.value],
       );
     });
 
@@ -274,20 +272,20 @@ document.addEventListener("DOMContentLoaded", () => {
   rxjs
     .fromEvent(elements.wordLengthInput, "change")
     .subscribe(({ target: { value } }) => {
-      if (data.$length.value !== value) {
+      if (state.$length.value !== value) {
         if (value >= 3 && value <= 20) {
-          data.$length.next(+value);
+          state.$length.next(+value);
         } else {
-          elements.wordLengthInput.value = data.$length.value;
+          elements.wordLengthInput.value = state.$length.value;
         }
       }
     });
 
-  window.data = data; // for debug purposes
+  window.state = state; // for debug purposes
 
   loadDictWithProgressBar()
     .then(words => {
-      data.dict = new Map(words.map((w, i) => [w, i]));
+      state.dict = new Map(words.map((w, i) => [w, i]));
       elements.loader.style.display = "none";
       elements.field.style.display = "block";
       resetGame();

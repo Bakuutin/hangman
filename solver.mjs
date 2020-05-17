@@ -3,7 +3,7 @@ const alphabet = Array.from("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
 
 const balanceBravery = spaceSize => Math.tanh(
   (spaceSize - 50) / 20
-) / 4 + 1 / 4;
+) / 4 + 1 / 4; // do you like magic?
 
 
 export const guess = (dict, possibleWords, outLetters) => {
