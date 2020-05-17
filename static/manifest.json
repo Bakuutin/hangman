@@ -1,0 +1,10 @@
+{
+    "name": "The Hangman",
+    "short_name": "Hangman",
+    "theme_color": "#ffffff",
+    "background_color": "#000000",
+    "description": "You guess a word, computer tries to solve it.",
+    "display": "standalone",
+    "scope": "/",
+    "start_url": "."
+}
