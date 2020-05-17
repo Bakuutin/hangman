@@ -246,6 +246,10 @@ h1 {
   transform-origin: bottom center;
 }
 
+.hide {
+  display: none;
+}
+
 @keyframes right-leg {
   0% {
     transform: rotate(-40deg);

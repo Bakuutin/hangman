@@ -19,18 +19,21 @@
 
     <script src="https://unpkg.com/@reactivex/rxjs@6.5.5/dist/global/rxjs.umd.js" defer></script>
     <script src="interactive.mjs" type="module" defer></script>
+
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v7.0&appId=254430989130754&autoLogAppEvents=1"></script>
   </head>
   <body>
+    <div id="fb-root"></div>
     <h1>The Hangman</h1>
     <div class="mt center content-centered">
       Word length:
       <input id="wordLengthInput" value="5" type="number" min="3" max="14">
-      <button id="refresh"><img src='static/refresh.svg'></button>
+      <button id="refresh" class="hide"><img src='static/refresh.svg'></button>
     </div>
 
     <div id="loader" class="mt"></div>
 
-    <div id="field">
+    <div id="field" class="hide">
 
       <div id="outLetters"></div>
       <div id="guess"></div>
@@ -50,14 +53,11 @@
         </div>
       </div>
     </div>
-    <div id="fb-root"></div>
     <div class="footer center">
       <div class="fb-like" data-href="https://bakuutin.github.io/hangman/" data-width="" data-layout="button" data-action="like" data-size="small" data-share="true"></div>
       <div>Made by <a href="https://github.com/Bakuutin" title="Bakuutin">Bakuutin</a></div>
       <div>Feel free to fork on <a href="https://github.com/Bakuutin/hangman" title="Github">Github</a></div>
       <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
     </div>
-    <div id="fb-root"></div>
-    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v7.0&appId=254430989130754&autoLogAppEvents=1"></script>
   </body>
 </html>

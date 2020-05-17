@@ -128,6 +128,15 @@ document.addEventListener("DOMContentLoaded", () => {
   data.$length.subscribe(resetGame);
   rxjs.fromEvent(elements.refresh, "click").subscribe(resetGame);
 
+  // show or hide refresh button
+  rxjs
+    .combineLatest(data.$word, data.$outLetters)
+    .pipe(rxjs.operators.debounceTime(100))
+    .subscribe(([word, outLetters]) => elements.refresh.classList.toggle(
+      "hide", !outLetters.length && !isGameOwer()
+    ));
+
+  // guess next letter
   rxjs
     .combineLatest(data.$word, data.$outLetters)
     .pipe(
@@ -224,11 +233,7 @@ document.addEventListener("DOMContentLoaded", () => {
     window.requestAnimationFrame(() => {
       for (let i = 0; i < parts.length; i++) {
         const el = parts[i];
-        if (i < n) {
-          el.style.display = "block";
-        } else {
-          el.style.display = "none";
-        }
+        el.classList.toggle("hide", i >= n);
       }
     });
 
@@ -278,7 +283,7 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
 
-  console.debug(data);
+  window.data = data; // for debug purposes
 
   loadDictWithProgressBar()
     .then(words => {
