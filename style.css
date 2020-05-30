@@ -41,14 +41,19 @@ h1 {
   justify-content: center;
 }
 
-.footer-container {
-  position: absolute;
-  bottom: 11px;
-  width: 100%;
+@media (min-height: 560px) {
+  .footer-container {
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+  }
 }
+
 
 .footer {
   color: gray;
+  padding-bottom: 11px;
+  font-size: small;
 }
 
 .footer a {
