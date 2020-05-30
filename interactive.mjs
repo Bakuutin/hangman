@@ -9,6 +9,8 @@ document.addEventListener("DOMContentLoaded", () => {
       "loader",
       "field",
       "word",
+      "howto",
+      "play",
       "wordLengthInput",
       "guess",
       "outLetters",
@@ -130,6 +132,15 @@ document.addEventListener("DOMContentLoaded", () => {
   rxjs.fromEvent(elements.refresh, "click").subscribe(resetGame);
 
   // show or hide refresh button
+  // also toggle blinking on word length input
+  state.$outLetters.subscribe(outLetters => {
+    elements.refresh.classList.toggle(
+      "hide", !outLetters.length && !isGameOwer(),
+    );
+    elements.wordLengthInput.classList.toggle("blinking", !outLetters.length);
+  });
+
+  // show or hide refresh button
   state.$outLetters.subscribe(outLetters => elements.refresh.classList.toggle(
     "hide", !outLetters.length && !isGameOwer()
   ));
@@ -222,8 +233,16 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   state.$word.subscribe(word => {
-    if (word && word.filter(l => !!l).length === word.length) {
+    if (!word) {
+      return;
+    }
+
+    const guessedLen = word.filter(l => !!l).length;
+
+    if (guessedLen === word.length) {
       endGame("Woohoo! I solved it.");
+    } else if (guessedLen > 0) {
+      elements.wordLengthInput.classList.toggle("blinking", false);
     }
   });
 
@@ -242,6 +261,14 @@ document.addEventListener("DOMContentLoaded", () => {
       );
     }
   });
+
+
+  rxjs
+    .fromEvent(elements.play, "click")
+    .subscribe(() => {
+      elements.field.classList.toggle("hide", false);
+      elements.howto.classList.toggle("hide", true);
+    });
 
   rxjs
     .fromEvent(elements.done, "click")
@@ -286,8 +313,8 @@ document.addEventListener("DOMContentLoaded", () => {
   loadDictWithProgressBar()
     .then(words => {
       state.dict = new Map(words.map((w, i) => [w, i]));
-      elements.loader.style.display = "none";
-      elements.field.style.display = "block";
+      elements.loader.classList.toggle("hide", true);
+      elements.play.classList.toggle("hide", false);
       resetGame();
     });
 });

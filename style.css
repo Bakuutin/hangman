@@ -5,6 +5,10 @@ body {
   margin: 0;
 }
 
+:root {
+  --blue: #1877f2;
+}
+
 .mt {
   margin-top: 10px;
 }
@@ -37,6 +41,12 @@ h1 {
   justify-content: center;
 }
 
+.footer-container {
+  position: absolute;
+  bottom: 11px;
+  width: 100%;
+}
+
 .footer {
   color: gray;
 }
@@ -45,7 +55,7 @@ h1 {
   color: gray;
 }
 
-.footer > * {
+.footer>* {
   margin-top: 10px;
 }
 
@@ -56,13 +66,33 @@ h1 {
   margin: 15px 0;
 }
 
+
+@keyframes blinking {
+  0% {
+    background: black;
+  }
+
+  100% {
+    background: var(--blue);
+  }
+}
+
+.blinking {
+  animation: blinking 1s infinite ease-in-out alternate;
+}
+
+
 #wordLengthInput {
-  width: 40px;
-  background: black;
-  border: none;
-  color: white;
-  height: 20px;
-  padding: 0 3px;
+    width: 40px;
+    background: black;
+    border: none;
+    color: white;
+    height: 20px;
+    font-weight: bold;
+    font-family: "Rye", cursive;
+    margin-left: 5px;
+    padding: 0 3px;
+    text-align: center;
 }
 
 #word {
@@ -93,17 +123,27 @@ h1 {
   font-weight: normal;
 }
 
-#done {
+.black-button {
   background: black;
   color: white;
+  padding: 2px 6px;
   font-family: "Rye", cursive;
   font-size: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
   border: none;
-  min-width: 15vmin;
   height: 30px;
+}
+
+.black-button:focus {
+  outline-color: var(--blue);
+  outline-style: auto;
+  outline-width: 1px;
+}
+
+#done {
+  min-width: 15vmin;
   margin: 0 auto;
 }
 
@@ -133,8 +173,9 @@ h1 {
   }
 }
 
-#word>button:focus, #word>button:hover {
-  color: #5027d9;
+#word>button:focus,
+#word>button:hover {
+  color: var(--blue);
 }
 
 #refresh {
@@ -148,8 +189,18 @@ h1 {
   height: 20px;
 }
 
-#refresh:focus img, #refresh:hover img {
-  filter: drop-shadow(0 0 3px #5027d9);
+#refresh:focus img,
+#refresh:hover img {
+  filter: drop-shadow(0 0 3px var(--blue));
+}
+
+
+.stable-body-container {
+  width: 30vmin;
+  height: 41vmin;
+  margin: 0 auto;
+  position: relative;
+  z-index: -1;
 }
 
 
@@ -163,17 +214,6 @@ h1 {
   }
 }
 
-#field {
-  display: none;
-}
-
-.stableBodyContainer {
-  width: 30vmin;
-  height: 41vmin;
-  margin: 0 auto;
-  position: relative;
-  z-index: -1;
-}
 
 #bodyContainer {
   top: 10vmin;
@@ -244,6 +284,28 @@ h1 {
   background: black;
   animation: left-hand 1s infinite alternate;
   transform-origin: bottom center;
+}
+
+#play {
+  margin: 35px auto;
+}
+
+#howto {
+  margin-bottom: 15px;
+  font-size: large;
+}
+
+#howto li {
+  margin-bottom: 6px;
+}
+
+#howto ol {
+  text-align: left;
+  max-width: 370px;
+  justify-content: center;
+  flex-flow: column;
+  display: flex;
+  margin: 15px auto;
 }
 
 .hide {
