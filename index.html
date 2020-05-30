@@ -45,7 +45,7 @@
 
       <div class="mt center content-centered">
         Word length:
-        <input class="blinking-black" id="wordLengthInput" value="5" type="number" min="3" max="14">
+        <input class="blinking-black" pattern="[0-9]*" inputmode="numeric" id="wordLengthInput" value="5" type="number" min="3" max="14">
         <button id="refresh" class="hide"><img src='static/refresh.svg'></button>
       </div>
 
@@ -70,11 +70,12 @@
 
     <div class="footer-container">
       <div class="footer center">
-        <iframe src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fbakuutin.github.io%2Fhangman%2F&width=112&layout=button&action=like&size=small&share=true&height=65&appId=254430989130754" width="112" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
-        <div>Made by <a href="https://github.com/Bakuutin" title="Bakuutin">Bakuutin</a></div>
+        <div class="addthis_inline_share_toolbox"></div>
+        <div>Game made by Bakuutin</div>
         <div>Feel free to fork on <a href="https://github.com/Bakuutin/hangman" title="Github">Github</a></div>
-        <div>Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
+        <div>Refresh icon made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a><br/>from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
       </div>
     </div>
+    <script type="text/javascript" src="https://s7.addthis.com/js/300/addthis_widget.js#pubid=ra-5ed262d2b1c186e0"></script>
   </body>
 </html>
